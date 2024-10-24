@@ -1,25 +1,26 @@
 package org.example;
+
 import java.util.Observable;
 import java.util.Observer;
-public class SupTecnico implements Observer{
 
+public class SupTecnico implements Observer {
     private String nome;
     private String ultimoChamado;
 
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
-
-    public  SupTecnico (String nome) {
+    public SupTecnico(String nome) {
         this.nome = nome;
     }
 
     public String getUltimoChamado() {
-        return ultimoChamado;
+        return this.ultimoChamado;
     }
 
-    public void setUltimoChamado(String ultimoChamado) {
-        this.ultimoChamado = ultimoChamado;
+    public void atenderChamado(Chamado chamado) {
+        chamado.addObserver(this);
+    }
+
+    @Override
+    public void update(Observable chamado, Object arg) {
+        this.ultimoChamado = this.nome + ", novo chamado registrado: " + chamado.toString();
     }
 }
